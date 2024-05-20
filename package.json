@@ -9,9 +9,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "hammerjs": "^2.0.8",
+    "svg-pan-zoom": "^3.6.1",
     "vue": "^3.4.21"
   },
   "devDependencies": {
+    "@types/hammerjs": "^2.0.45",
     "@vitejs/plugin-vue": "^5.0.4",
     "vite": "^5.2.0"
   }
