@@ -311,12 +311,13 @@ svgComponent.addEventListener("mouseEnter", function (event) {
   ._instance.exposed.setColor(event.detail[0].id,'white');
   var gTag = shadowRoot.getElementById(event.detail[0].id)
   var rect = gTag.getBoundingClientRect();
+  console.log(rect,"rect")
   document.getElementById(layers[event.detail[0].id].floor_id).style.display =
     "inline-flex";
   document.getElementById(layers[event.detail[0].id].floor_id).style.top =
     rect.y - 100 + "px";
   document.getElementById(layers[event.detail[0].id].floor_id).style.left =
-    rect.x - 350 + "px";
+    rect.right + 40 + "px";
 });
 //In the mouseLeave event the floor detail card corresponding to the floor_id taken from svg layer ID(event.detail[0].id) is hidden.
 svgComponent.addEventListener("mouseLeave", function (event) {

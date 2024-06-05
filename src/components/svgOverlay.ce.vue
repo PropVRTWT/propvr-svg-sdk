@@ -9,7 +9,7 @@ export default {
     },
   },
   emits: ["clickEvent", "mouseEnter", "mouseLeave", "svgLoaded"],
-  expose: ['zoom','setColor'],
+  expose: ['zoom', 'setColor'],
   data() {
     return {
       containerRef: null,
@@ -200,7 +200,7 @@ export default {
       });
       document.dispatchEvent(panstart_panmove);
     },
-    setColor(id,color){
+    setColor(id, color) {
       const shadowHost = document.querySelector("#svg-overlay");
       const shadowRoot = shadowHost.shadowRoot;
       var svgGroup = shadowRoot.getElementById(id);
@@ -251,25 +251,25 @@ export default {
           } else {
             newZoom = Math.max(newZoom, targetZoom);
           }
-          window.panzoomer.zoomAtPoint(newZoom, { x: rect.left, y: rect.top });
+          window.panzoomer.zoomAtPoint(newZoom, { x: window.innerWidth, y: rect.top });
 
           // Recalculate pan amounts at each step
           const rectYPercent =
             window.innerHeight / 2 - rect.top + rect.height / 2 - rect.height;
           const rectXPercent =
-            window.innerWidth / 2 - rect.left + rect.width / 2 - rect.width;
+            (window.innerWidth / 2 - rect.left + rect.width / 2 - rect.width);
           stepX = rectXPercent / animationSteps;
           stepY = rectYPercent / animationSteps;
 
           // Pan the SVG group
           if (animationStep++ < animationSteps && rectXPercent !== 0) {
-            window.panzoomer.panBy({ x: stepX, y: stepY });
+            window.panzoomer.panBy({ x: 0, y: stepY });
             // Request next animation frame
             requestAnimationFrame(animate);
           } else {
             // If animation is complete, set the final zoom level
             window.panzoomer.zoomAtPoint(targetZoom, {
-              x: rect.left,
+              x: 0,
               y: rect.top,
             });
           }
@@ -285,40 +285,16 @@ export default {
 <template>
   <div ref="containerRef" class="svgContainer">
     <div class="svgWrapper">
-      <svg
-        ref="SVGLayer"
-        version="1.1"
-        id="SVGLayer"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-        x="0px"
-        y="0px"
-        viewBox="0 0 1920 1080"
-        style="enable-background: new 0 0 1920 1080"
-        xml:space="preserve"
-        preserveAspectRatio="xMidYMid slice"
-        class="svgLayer"
-      >
-        <image
-          style="transform-origin: center center;transition: transform 2s; opacity 0.1s;object-fit:contain"
-          v-bind:xlink:href="bgImage"
-        ></image>
-        <component
-          v-for="layer in style"
-          :key="layer"
-          is="style"
-          v-html="layer.innerHTML"
-        ></component>
-        <g
-          @click="clickEvent(layer)"
-          @mouseenter="mouseEnter(layer)"
-          @mouseleave="mouseLeave(layer)"
-          v-for="layer in layers"
-          :key="layer"
-          :id="layer.getAttribute('id')"
-          :class="layer.getAttribute('class')"
-          v-html="layer.innerHTML"
-        ></g>
+      <svg ref="SVGLayer" version="1.1" id="SVGLayer" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1920 1080"
+        style="enable-background: new 0 0 1920 1080" xml:space="preserve" preserveAspectRatio="xMidYMid slice"
+        class="svgLayer">
+        <image style="transform-origin: center center;transition: transform 2s; opacity:0.1s;object-fit:contain"
+          v-bind:xlink:href="bgImage"></image>
+        <component v-for="layer in style" :key="layer" is="style" v-html="layer.innerHTML"></component>
+        <g @click="clickEvent(layer)" @mouseenter="mouseEnter(layer)" @mouseleave="mouseLeave(layer)"
+          v-for="layer in layers" :key="layer" :id="layer.getAttribute('id')" :class="layer.getAttribute('class')"
+          v-html="layer.innerHTML"></g>
       </svg>
     </div>
   </div>
@@ -335,6 +311,7 @@ svg {
   display: block;
   overflow: auto;
 }
+
 .svgContainer {
   height: 100%;
   width: 100%;
@@ -344,23 +321,28 @@ svg {
   /* transform-origin: center center;
   transition: transform 0.5s, opacity 0.5s; */
 }
+
 .svgWrapper {
   height: 100%;
   width: 100%;
   overflow: hidden;
   position: relative;
 }
+
 .fade-in-overlay {
   opacity: 0;
   transition: opacity 2s ease;
 }
+
 .fade-in-animation {
   opacity: 1;
 }
+
 .svgContainer.active {
   transform: scale(1.2);
   opacity: 0;
 }
+
 .svgContent {
   width: 100%;
   height: 100%;
@@ -368,10 +350,12 @@ svg {
   white-space: nowrap;
   scroll-behavior: smooth;
 }
+
 .svgContent::-webkit-scrollbar {
   width: 0px;
   height: 0px;
 }
+
 .svg-pan-zoom_viewport {
   height: 100%;
   width: 100%;
