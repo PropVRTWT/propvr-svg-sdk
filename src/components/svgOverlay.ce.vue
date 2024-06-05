@@ -206,35 +206,110 @@ export default {
       var svgGroup = shadowRoot.getElementById(id);
       svgGroup.style.fill = color;
     },
-    zoom(id) {
+    // zoom(id,leftPosition,animationTimeX) {
+    //   const shadowHost = document.querySelector("#svg-overlay");
+    //   const shadowRoot = shadowHost.shadowRoot;
+    //   var svgGroup = shadowRoot.getElementById(id);
+    //   // Get the bounding rectangle of the SVG group
+    //   var rect = svgGroup.getBoundingClientRect();
+    //   // Define animation parameters
+    //   var animationTime = 300; // Ms
+    //   var animationStepTime = 15;
+    //   var animationSteps = animationTime / animationStepTime;
+    //   var animationStep = 0;
+    //   if (window.panzoomer) {
+    //     // Define the duration of the animation in milliseconds
+    //     const duration = 1000; // You can adjust this value as needed
+    //     const targetZoom = 1.75;
+
+    //     // Calculate the difference between current and target zoom levels
+    //     const currentZoom = window.panzoomer.getZoom();
+    //     const zoomDifference = targetZoom - currentZoom;
+    //     // Calculate the increment per frame for zooming
+    //     const incrementPerFrame = zoomDifference / (duration / (1000 / 60)); // Assuming 60 FPS
+
+    //     // Calculate initial pan amounts
+    //     const initialRectYPercent =
+    //       window.innerHeight / 2 - rect.top + rect.height / 2 - rect.height;
+    //     const initialRectXPercent =
+    //       window.innerWidth / 2 - rect.left + rect.width / 2 - rect.width;
+    //     let stepX = initialRectXPercent / animationSteps;
+    //     let stepY = initialRectYPercent / animationSteps;
+
+    //     // Record the start time of the animation
+    //     const startTime = performance.now();
+
+    //     // Define the animation function
+    //     const animate = (timestamp) => {
+    //       // Calculate the time elapsed since the animation started
+    //       const elapsed = timestamp - startTime;
+
+    //       // Update the current zoom level
+    //       let newZoom = currentZoom + incrementPerFrame * elapsed;
+    //       if (zoomDifference > 0) {
+    //         newZoom = Math.min(newZoom, targetZoom);
+    //       } else {
+    //         newZoom = Math.max(newZoom, targetZoom);
+    //       }
+    //       window.panzoomer.zoomAtPoint(newZoom, { x: window.innerWidth - leftPosition, y: rect.top });
+
+    //       // Recalculate pan amounts at each step
+    //       const rectYPercent =
+    //         window.innerHeight / 2 - rect.top + rect.height / 2 - rect.height;
+    //       const rectXPercent =
+    //         (window.innerWidth / 2 - rect.left + rect.width / 2 - rect.width);
+    //       stepX = rectXPercent / animationSteps;
+    //       stepY = rectYPercent / animationSteps;
+
+    //       // Pan the SVG group
+    //       if (animationStep++ < animationSteps && rectXPercent !== 0) {
+    //         window.panzoomer.panBy({ x: 0, y: stepY });
+    //         // Request next animation frame
+    //         requestAnimationFrame(animate);
+    //       } else {
+    //         // If animation is complete, set the final zoom level
+    //         window.panzoomer.zoomAtPoint(targetZoom, {
+    //           x: window.innerWidth / 2 - leftPosition,
+    //           y: rect.top,
+    //         });
+    //       }
+    //     };
+
+    //     // Start the animation
+    //     requestAnimationFrame(animate);
+    //   }
+    // },
+    zoom(id, leftPosition, animationTimeX) {
       const shadowHost = document.querySelector("#svg-overlay");
       const shadowRoot = shadowHost.shadowRoot;
       var svgGroup = shadowRoot.getElementById(id);
       // Get the bounding rectangle of the SVG group
       var rect = svgGroup.getBoundingClientRect();
+
       // Define animation parameters
-      var animationTime = 300; // Ms
+      var animationTimeY = 300; 
       var animationStepTime = 15;
-      var animationSteps = animationTime / animationStepTime;
-      var animationStep = 0;
+      var animationStepsY = animationTimeY / animationStepTime;
+      var animationStepsX = animationTimeX / animationStepTime;
+      var animationStepY = 0;
+      var animationStepX = 0;
+
       if (window.panzoomer) {
-        // Define the duration of the animation in milliseconds
-        const duration = 1000; // You can adjust this value as needed
         const targetZoom = 1.75;
 
         // Calculate the difference between current and target zoom levels
         const currentZoom = window.panzoomer.getZoom();
         const zoomDifference = targetZoom - currentZoom;
         // Calculate the increment per frame for zooming
-        const incrementPerFrame = zoomDifference / (duration / (1000 / 60)); // Assuming 60 FPS
+        const incrementPerFrame = zoomDifference / (animationTimeX / (1000 / 60)); // Assuming 60 FPS
 
         // Calculate initial pan amounts
         const initialRectYPercent =
           window.innerHeight / 2 - rect.top + rect.height / 2 - rect.height;
         const initialRectXPercent =
           window.innerWidth / 2 - rect.left + rect.width / 2 - rect.width;
-        let stepX = initialRectXPercent / animationSteps;
-        let stepY = initialRectYPercent / animationSteps;
+        let stepX = initialRectXPercent / animationStepsX;
+        let stepY = initialRectYPercent / animationStepsY;
 
         // Record the start time of the animation
         const startTime = performance.now();
@@ -251,25 +326,33 @@ export default {
           } else {
             newZoom = Math.max(newZoom, targetZoom);
           }
-          window.panzoomer.zoomAtPoint(newZoom, { x: window.innerWidth, y: rect.top });
+          window.panzoomer.zoomAtPoint(newZoom, { x: window.innerWidth - leftPosition, y: rect.top });
 
           // Recalculate pan amounts at each step
           const rectYPercent =
             window.innerHeight / 2 - rect.top + rect.height / 2 - rect.height;
           const rectXPercent =
-            (window.innerWidth / 2 - rect.left + rect.width / 2 - rect.width);
-          stepX = rectXPercent / animationSteps;
-          stepY = rectYPercent / animationSteps;
+            window.innerWidth / 2 - rect.left + rect.width / 2 - rect.width;
+          stepX = rectXPercent / animationStepsX;
+          stepY = rectYPercent / animationStepsY;
 
-          // Pan the SVG group
-          if (animationStep++ < animationSteps && rectXPercent !== 0) {
+          // Pan the SVG group on Y-axis
+          if (animationStepY++ < animationStepsY && rectYPercent !== 0) {
             window.panzoomer.panBy({ x: 0, y: stepY });
-            // Request next animation frame
+          }
+
+          // Pan the SVG group on X-axis
+          if (animationStepX++ < animationStepsX && rectXPercent !== 0) {
+            window.panzoomer.panBy({ x: 0, y: 0 });
+          }
+
+          // Request next animation frame
+          if (animationStepY < animationStepsY || animationStepX < animationStepsX) {
             requestAnimationFrame(animate);
           } else {
             // If animation is complete, set the final zoom level
             window.panzoomer.zoomAtPoint(targetZoom, {
-              x: 0,
+              x: window.innerWidth / 2 - leftPosition,
               y: rect.top,
             });
           }
@@ -278,7 +361,8 @@ export default {
         // Start the animation
         requestAnimationFrame(animate);
       }
-    },
+    }
+
   },
 };
 </script>
