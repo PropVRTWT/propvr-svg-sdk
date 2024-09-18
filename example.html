@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Web Component SDK</title>
+    <script type="module" src="./dist/svg-overlay.js"></script>
+</head>
+<body>
+		<svg-overlay
+				id="svg-overlay"
+		    svg-array="['./public/Inventory/Golf Greens 1 floor selection.svg']" 
+		    bg-image="./public/Inventory/Golf-Greens-1-floor-selection.png">
+		</svg-overlay>
+    <div id="cardDiv"></div>
+</body>
+<style>
+  html,body{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+  }
+</style>
+<script>
+  //layers object consists of the Tower svg layer details
+const layers = {
+  2522195: {
+    id: "2522195",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  3607197: {
+    id: "3607197",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  3866712: {
+    id: "3866712",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  4732191: {
+    id: "4732191",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  6925229: {
+    id: "6925229",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  7022823: {
+    id: "7022823",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  8426236: {
+    id: "8426236",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  8592080: {
+    id: "8592080",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  8940694: {
+    id: "8940694",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  9958178: {
+    id: "9958178",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  11550233: {
+    id: "11550233",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  12786519: {
+    id: "12786519",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  13528420: {
+    id: "13528420",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  14192129: {
+    id: "14192129",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  16577725: {
+    id: "16577725",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  20649147: {
+    id: "20649147",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  27833914: {
+    id: "27833914",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  30024012: {
+    id: "30024012",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  33610511: {
+    id: "33610511",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  38800146: {
+    id: "38800146",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  40650542: {
+    id: "40650542",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  41092518: {
+    id: "41092518",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  44807237: {
+    id: "44807237",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  47103638: {
+    id: "47103638",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  47154810: {
+    id: "47154810",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  49589031: {
+    id: "49589031",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  51266048: {
+    id: "51266048",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  56608536: {
+    id: "56608536",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  60987723: {
+    id: "60987723",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  61044530: {
+    id: "61044530",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  65383717: {
+    id: "65383717",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  66680545: {
+    id: "66680545",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  68201626: {
+    id: "68201626",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  69618415: {
+    id: "69618415",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  69856228: {
+    id: "69856228",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  71623232: {
+    id: "71623232",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  71818040: {
+    id: "71818040",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  72684039: {
+    id: "72684039",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  79213435: {
+    id: "79213435",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  82796244: {
+    id: "82796244",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  82982921: {
+    id: "82982921",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  86161822: {
+    id: "86161822",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  86490934: {
+    id: "86490934",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  87972127: {
+    id: "87972127",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  88431413: {
+    id: "88431413",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  90075943: {
+    id: "90075943",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  91794624: {
+    id: "91794624",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  93597616: {
+    id: "93597616",
+    floor_id: "6647115ec7660efa230e96a7",
+    type: "floor",
+  },
+  97728841: {
+    id: "97728841",
+    floor_id: "6647115ec7660efa230e96a8",
+    type: "floor",
+  },
+};
+//floorData object consits of each floor details of a Tower
+const floorData = {
+  "6647115ec7660efa230e96a7": {
+    id: "6647115ec7660efa230e96a7",
+    name: "42",
+    units: 34,
+    minArea: 500,
+    maxArea: 1000,
+    availableUnits: 0,
+  },
+  "6647115ec7660efa230e96a8": {
+    id: "6647115ec7660efa230e96a8",
+    name: "43",
+    units: 34,
+    minArea: 500,
+    maxArea: 1000,
+    availableUnits: 8,
+  },
+};
+document.addEventListener('DOMContentLoaded', () => {
+  const svgComponent = document.querySelector("#svg-overlay");
+
+  // Ensure the component exists and the shadowRoot is accessible
+  if (svgComponent) {
+    const svgComponent = document.querySelector("#svg-overlay");
+// shadowRoot element of the SDK to access the html elemnts
+const shadowRoot = svgComponent.shadowRoot;
+//here in click event, the svg layer ID(event.detail[0].id) clicked is returned.
+//with the ID,zoomFun() of the SDK is called to zoom in on the svg layer clicked
+svgComponent.addEventListener("clickEvent", function (event) {
+    svgComponent
+    ._instance.exposed.zoom(event.detail[0].id,100,10000);
+});
+//here in mouseEnter event, with the svg layer ID(event.detail[0].id), the style of the svg layer is modified to show it highlightened.
+//With the svg layer ID, from layers object the respective floor_id is taken.
+//The adjacent position of the svg layer is taken and set to the style of the  floor detail card corresponding to the floor_id and shown.
+svgComponent.addEventListener("mouseEnter", function (event) {
+  svgComponent
+  ._instance.exposed.setColor(event.detail[0].id,'white');
+  var gTag = shadowRoot.getElementById(event.detail[0].id)
+  var rect = gTag.getBoundingClientRect();
+  console.log(rect,"rect")
+  document.getElementById(layers[event.detail[0].id].floor_id).style.display =
+    "inline-flex";
+  document.getElementById(layers[event.detail[0].id].floor_id).style.top =
+    rect.y - 100 + "px";
+  document.getElementById(layers[event.detail[0].id].floor_id).style.left =
+    rect.right + 40 + "px";
+});
+//In the mouseLeave event the floor detail card corresponding to the floor_id taken from svg layer ID(event.detail[0].id) is hidden.
+svgComponent.addEventListener("mouseLeave", function (event) {
+  var gTag = shadowRoot.getElementById(event.detail[0].id);
+ 
+  if(floorData[layers[event.detail[0].id].floor_id].availableUnits>0){
+    gTag.style.fill = "green";
+}
+else{
+    gTag.style.fill = "initial";
+}
+  document.getElementById(layers[event.detail[0].id].floor_id).style.display =
+    "none";
+});
+svgComponent.addEventListener("svgLoaded", function (event) {
+    Object.values(event.detail[0]).map((item)=>{
+        if(item.id && floorData[layers[item.id].floor_id].availableUnits>0){
+            var gTag = shadowRoot.getElementById(item.id);
+            gTag.style.fill = "green";
+        }
+    })
+});
+//this snippet loops the floorData object, to create cards div dynamically using the details and appends to the innerHTML of cardDiv element, these is cards are initially hidden and shown according to the floors selected while hovered on the floors.
+Object.keys(floorData).map((key) => {
+    console.log(floorData[key].id);
+  document.getElementById("cardDiv").innerHTML += `  
+    <div id="${floorData[key].id}" style="position: absolute;display:none; width: 279px; height:165px; padding: 16px; background: rgba(38, 38, 38, 0.75); border-radius: 16px; overflow: hidden; border: 1px #8E95A2 solid; backdrop-filter: blur(40px); justify-content: center; align-items: center;">
+    <div style="flex: 1 1 0; align-self: stretch; position: relative">
+        <div style="width: 247px; height: 56px; left: 0px; top: 77px; position: absolute; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 8px; display: inline-flex">
+            <div style="justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
+                <div style="width: 24px; height: 24px; position: relative">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M6.29398 7.71481C6.04704 7.94515 5.66014 7.93169 5.4298 7.68476L4.18687 6.35229C3.96725 6.11685 3.96785 5.75143 4.18824 5.5167L5.43116 4.19292C5.66231 3.94673 6.04926 3.93454 6.29544 4.16569C6.54162 4.39683 6.55381 4.78378 6.32266 5.02997L6.01583 5.35676H12.9278L12.6229 5.02987C12.3925 4.78293 12.406 4.39603 12.6529 4.16569C12.8999 3.93534 13.2868 3.9488 13.5171 4.19573L14.76 5.5282C14.9797 5.76365 14.9791 6.12907 14.7587 6.36379L13.5157 7.68758C13.2846 7.93376 12.8977 7.94595 12.6515 7.7148C12.4053 7.48366 12.3931 7.09671 12.6242 6.85053L12.9285 6.52647H6.02165L6.32403 6.85062C6.55437 7.09756 6.54091 7.48447 6.29398 7.71481ZM4 10.4336C4 9.71573 4.58198 9.13375 5.2999 9.13375H13.1983C13.9162 9.13375 14.4982 9.71573 14.4982 10.4336V18.3179C14.4982 19.0358 13.9162 19.6178 13.1983 19.6178H5.2999C4.58199 19.6178 4 19.0358 4 18.3179V10.4336ZM15.9395 10.1493C15.6926 10.3797 15.6792 10.7666 15.9095 11.0135C16.1398 11.2605 16.5267 11.2739 16.7737 11.0436L17.1008 10.7384L17.1008 18.0052L16.7758 17.7C16.5296 17.4688 16.1426 17.481 15.9115 17.7272C15.6804 17.9734 15.6925 18.3603 15.9387 18.5915L17.2625 19.8344C17.4972 20.0548 17.8627 20.0554 18.0981 19.8358L19.4306 18.5928C19.6775 18.3625 19.691 17.9756 19.4606 17.7287C19.2303 17.4817 18.8434 17.4683 18.5964 17.6986L18.2706 18.0026L18.2706 10.7382L18.5943 11.0422C18.8405 11.2733 19.2275 11.2612 19.4586 11.015C19.6898 10.7688 19.6776 10.3818 19.4314 10.1507L18.1076 8.90777C17.8729 8.68738 17.5075 8.68679 17.272 8.90641L15.9395 10.1493Z" fill="white"/>
+                  </svg>
+                    
+                </div>
+                <div style="color: white; font-size: 16px; font-family: Roboto; font-weight: 400; word-wrap: break-word">${floorData[key].units} Units</div>
+            </div>
+            <div style="justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
+                <div style="width: 24px; height: 24px; position: relative">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M11.4965 11.2298V5.0668H6.87424C6.02683 5.0668 5.3335 5.76014 5.3335 6.60754V11.2298H11.4965ZM13.0372 11.2298H19.2002V6.60754C19.2002 5.76014 18.5068 5.0668 17.6594 5.0668H13.0372V11.2298ZM11.4965 12.7705H5.3335V17.3927C5.3335 18.2401 6.02683 18.9335 6.87424 18.9335H11.4965V12.7705ZM13.0372 12.7705V18.9335H17.6594C18.5068 18.9335 19.2002 18.2401 19.2002 17.3927V12.7705H13.0372Z" fill="white"/>
+                  </svg>                    
+                </div>
+                <div style="width: 147px; height: 20px; color: white; font-size: 16px; font-family: Roboto; font-weight: 400; word-wrap: break-word">${floorData[key].minArea} - ${floorData[key].maxArea} sqft</div>
+            </div>
+        </div>
+        <div style="width: 247px; height: 57px; left: 0px; top: 0px; position: absolute">
+            <div style="width: 75px; height: 36px; left: 0px; top: 0px; position: absolute"><span style="color: white; font-size: 36px; font-family: Roboto; font-weight: 500; text-transform: capitalize; word-wrap: break-word">${floorData[key].name}</span><span style="color: white; font-size: 48px; font-family: Roboto; font-weight: 500; text-transform: capitalize; word-wrap: break-word"> </span><span style="color: white; font-size: 16px; font-family: Roboto; font-weight: 400; text-transform: lowercase; word-wrap: break-word">nd</span><span style="color: white; font-size: 18px; font-family: Roboto; font-weight: 400; text-transform: capitalize; word-wrap: break-word"> </span></div>
+            <div style="width: 88px; left: 0px; top: 46px; position: absolute; color: #B6BAC3; font-size: 16px; font-family: Roboto; font-weight: 300; text-transform: capitalize; word-wrap: break-word">FLOOR</div>
+            <div style="padding: 8px; left: 146px; top: 0px; position: absolute; background: rgba(82.43, 233.48, 153.43, 0.22); border-radius: 8px; border: 1px #14D56F solid; justify-content: flex-start; align-items: center; gap: 4px; display: inline-flex">
+                <div><span style="color: white; font-size: 14px; font-family: Roboto; font-weight: 500; text-transform: capitalize; word-wrap: break-word">Available</span></div>
+                <div style="color: white; font-size: 14px; font-family: Roboto; font-weight: 400; text-transform: capitalize; word-wrap: break-word">${floorData[key].availableUnits}</div>
+            </div>
+        </div>
+    </div>
+    </div>`;
+});
+  }
+});
+
+
+</script>
+</html>
