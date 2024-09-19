@@ -301,7 +301,7 @@ const shadowRoot = svgComponent.shadowRoot;
 //with the ID,zoomFun() of the SDK is called to zoom in on the svg layer clicked
 svgComponent.addEventListener("clickEvent", function (event) {
     svgComponent
-    ._instance.exposed.zoom(event.detail[0].id,100,10000);
+    ._instance.exposed.zoom(event.detail[0].id,100,1000);
 });
 //here in mouseEnter event, with the svg layer ID(event.detail[0].id), the style of the svg layer is modified to show it highlightened.
 //With the svg layer ID, from layers object the respective floor_id is taken.

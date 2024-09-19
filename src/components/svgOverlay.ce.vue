@@ -174,6 +174,7 @@ export default {
         // On pinch start remember initial zoom
         if (ev.type === "pinchstart") {
           initialScale = instance.getZoom();
+
           instance.zoomAtPoint(initialScale * ev.scale, {
             x: ev.center.x,
             y: ev.center.y,
@@ -280,17 +281,17 @@ export default {
     //   }
     // },
     zoom(id, leftPosition, animationTimeX) {
+      console.log("dadsd")
       const shadowHost = document.querySelector("#svg-overlay");
       const shadowRoot = shadowHost.shadowRoot;
       var svgGroup = shadowRoot.getElementById(id);
       // Get the bounding rectangle of the SVG group
       var rect = svgGroup.getBoundingClientRect();
-
       // Define animation parameters
-      var animationTimeY = 300; 
+      var animationTimeY = animationTimeX / 3; 
       var animationStepTime = 15;
       var animationStepsY = animationTimeY / animationStepTime;
-      var animationStepsX = animationTimeX / animationStepTime;
+      var animationStepsX = (animationTimeX / 2) / animationStepTime;
       var animationStepY = 0;
       var animationStepX = 0;
 
@@ -310,7 +311,7 @@ export default {
           window.innerWidth / 2 - rect.left + rect.width / 2 - rect.width;
         let stepX = initialRectXPercent / animationStepsX;
         let stepY = initialRectYPercent / animationStepsY;
-
+      
         // Record the start time of the animation
         const startTime = performance.now();
 
@@ -348,9 +349,11 @@ export default {
 
           // Request next animation frame
           if (animationStepY < animationStepsY || animationStepX < animationStepsX) {
-            requestAnimationFrame(animate);
+              requestAnimationFrame(animate);
           } else {
             // If animation is complete, set the final zoom level
+            console.log(targetZoom)
+
             window.panzoomer.zoomAtPoint(targetZoom, {
               x: window.innerWidth / 2 - leftPosition,
               y: rect.top,
